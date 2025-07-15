@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Eventos - SPA</title>
+    <link rel="stylesheet" href="./src/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-calendar-alt"></i>
+                <span>EventManager</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="#/" class="nav-link" data-page="home">Inicio</a>
+                <a href="#/events" class="nav-link" data-page="events">Eventos</a>
+                <a href="#/login" class="nav-link" data-page="login" id="loginLink">Iniciar Sesión</a>
+                <a href="#/register" class="nav-link" data-page="register" id="registerLink">Registrarse</a>
+                <div class="user-menu" id="userMenu" style="display: none;">
+                    <span id="userName"></span>
+                    <button id="logoutBtn" class="btn-logout">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Page -->
+        <div id="homePage" class="page active">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1>Gestión de Eventos</h1>
+                    <p>Plataforma completa para organizar y gestionar eventos de manera eficiente</p>
+                    <div class="hero-buttons">
+                        <a href="#/events" class="btn btn-primary">Ver Eventos</a>
+                        <a href="#/register" class="btn btn-secondary">Registrarse</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+            </div>
+            
+            <div class="features-section">
+                <h2>Características Principales</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-users"></i>
+                        <h3>Gestión de Asistentes</h3>
+                        <p>Control completo sobre la lista de participantes</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Gestión de Lugares</h3>
+                        <p>Administración eficiente de espacios y capacidad</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Análisis en Tiempo Real</h3>
+                        <p>Monitoreo de estadísticas y métricas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login Page -->
+        <div id="loginPage" class="page">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <h2>Iniciar Sesión</h2>
+                    <form id="loginForm" class="auth-form">
+                        <div class="form-group">
+                            <label for="loginEmail">Email</label>
+                            <input type="email" id="loginEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Contraseña</label>
+                            <input type="password" id="loginPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                    </form>
+                    <p class="auth-link">
+                        ¿No tienes cuenta? <a href="#/register">Regístrate aquí</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Register Page -->
+        <div id="registerPage" class="page">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <h2>Registrarse</h2>
+                    <form id="registerForm" class="auth-form">
+                        <div class="form-group">
+                            <label for="registerName">Nombre Completo</label>
+                            <input type="text" id="registerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerUsername">Nombre de Usuario</label>
+                            <input type="text" id="registerUsername" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerEmail">Email</label>
+                            <input type="email" id="registerEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPassword">Contraseña</label>
+                            <input type="password" id="registerPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerRole">Rol</label>
+                            <select id="registerRole" required>
+                                <option value="">Selecciona un rol</option>
+                                <option value="visitante">Visitante</option>
+                                <option value="administrador">Administrador</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Registrarse</button>
+                    </form>
+                    <p class="auth-link">
+                        ¿Ya tienes cuenta? <a href="#/login">Inicia sesión aquí</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Events Page -->
+        <div id="eventsPage" class="page">
+            <div class="events-container">
+                <div class="events-header">
+                    <h2>Eventos Disponibles</h2>
+                    <button id="createEventBtn" class="btn btn-primary" style="display: none;">
+                        <i class="fas fa-plus"></i> Crear Evento
+                    </button>
+                </div>
+                <div id="eventsList" class="events-grid"></div>
+            </div>
+        </div>
+
+        <!-- Event Form Modal -->
+        <div id="eventModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 id="modalTitle">Crear Evento</h2>
+                <form id="eventForm" class="event-form">
+                    <div class="form-group">
+                        <label for="eventTitle">Título del Evento</label>
+                        <input type="text" id="eventTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventDescription">Descripción</label>
+                        <textarea id="eventDescription" required></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="eventDate">Fecha</label>
+                            <input type="date" id="eventDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventTime">Hora</label>
+                            <input type="time" id="eventTime" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventLocation">Ubicación</label>
+                        <input type="text" id="eventLocation" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="eventCapacity">Capacidad</label>
+                            <input type="number" id="eventCapacity" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventPrice">Precio</label>
+                            <input type="number" id="eventPrice" min="0" step="0.01" required>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="cancelEventBtn">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar Evento</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Event Details Modal -->
+        <div id="eventDetailsModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="eventDetails"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script type="module" src="./src/js/main.js"></script>
+</body>
+</html>

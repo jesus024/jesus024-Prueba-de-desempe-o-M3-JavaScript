@@ -1,0 +1,58 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "email": "admin@eventos.com",
+      "password": "admin123",
+      "role": "administrador",
+      "name": "Administrador Principal"
+    },
+    {
+      "id": 2,
+      "username": "visitante1",
+      "email": "visitante1@email.com",
+      "password": "visitante123",
+      "role": "visitante",
+      "name": "Juan Pérez"
+    }
+  ],
+  "events": [
+    {
+      "id": 1,
+      "title": "Conferencia de Tecnología 2024",
+      "description": "Una conferencia sobre las últimas tendencias en tecnología",
+      "date": "2024-12-15",
+      "time": "14:00",
+      "location": "Centro de Convenciones",
+      "capacity": 200,
+      "registeredAttendees": 45,
+      "price": 50,
+      "organizer": "admin",
+      "status": "activo"
+    },
+    {
+      "id": 2,
+      "title": "Workshop de Desarrollo Web",
+      "description": "Taller práctico sobre desarrollo web moderno",
+      "date": "2024-12-20",
+      "time": "10:00",
+      "location": "Sala de Capacitación",
+      "capacity": 30,
+      "registeredAttendees": 25,
+      "price": 25,
+      "organizer": "admin",
+      "status": "activo"
+    }
+  ],
+  "attendees": [
+    {
+      "id": 1,
+      "eventId": 1,
+      "userId": 2,
+      "name": "Juan Pérez",
+      "email": "visitante1@email.com",
+      "registrationDate": "2024-12-01"
+    }
+  ]
+}
